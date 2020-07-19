@@ -10,7 +10,6 @@ import (
 
 func ToJsonFromFile(directory string) []map[string]interface{} {
 	data, err := ioutil.ReadFile(directory)
-	
 	data = bytes.Replace(data, []byte("\\'"), []byte(`'`), -1)
 	data = bytes.Replace(data, []byte("\t"), []byte(` `), -1)
 	data = bytes.Replace(data, []byte("\r"), []byte(` `), -1)
