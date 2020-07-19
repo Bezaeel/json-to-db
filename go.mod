@@ -2,4 +2,7 @@ module json-to-db
 
 go 1.14
 
-require github.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518
+require (
+	github.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518
+	go.mongodb.org/mongo-driver v1.3.5
+)

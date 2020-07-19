@@ -2,27 +2,24 @@ package main
 
 import (
 	"fmt"
-	"json-to-db/util"
-	// "sync"
+	"json-to-db/pkg"
+	"sync"
 	"time"
 )
 
-func main(){
-	votes := make([]map[string]interface{}, 0)
+func main() {
 	start := time.Now()
-	votes = util.ToJsonFromFile(".././example_1.json")
-	//use go routine
-	// var wg sync.WaitGroup
-	// wg.Add(1)
-	// go func ()  {
-	// 	votes = util.ToJsonFromFile(".././example_1.json")
-	// 	wg.Done()
-	// }()
-	
-	// wg.Wait()
-	fmt.Printf("%v \n", time.Since(start))
-	for _, v := range votes{
-		fmt.Println(v)
-	}
+	//without go routine
+	// pkg.LoadVotes()
 
+	//use go routine
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		pkg.LoadVotes()
+		wg.Done()
+	}()
+
+	wg.Wait()
+	fmt.Printf("%v \n", time.Since(start))
 }
